@@ -43,7 +43,7 @@ To help you complete the task, several members of your team will provide you wit
 
 This is a **full-stack web application** that comprises both back-end and front-end components. If deployed to production, the back-end part would run in the cloud (think Amazon Web Services or Azure), while the front-end would execute inside the user's web browser (like Chrome for Android, or Firefox for desktop).
 
-As a front-end engineer, your focus is mainly on the files that load **on the user's device**. In this particular case, these files live inside the `frontent` folder. The `backend` folder contains a web server built in Node, but the project as a whole is managed as a Node application. As such, it contains a `package.json` file at the root, containing some meta-information like name and version, and a few useful scripts developers can use as they work on the app, like "npm test".
+As a front-end engineer, your focus is mainly on the files that load **on the user's device**. In this particular case, these files live inside the `frontend` folder. The `backend` folder contains a web server built in Node, but the project as a whole is managed as a Node application. As such, it contains a `package.json` file at the root, containing some meta-information like name and version, and a few useful scripts developers can use as they work on the app, like "npm test".
 
 1. You will **clone this repository** to your computer, which will allow you to run the software locally for development and testing purposes.
 
