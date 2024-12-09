@@ -118,7 +118,7 @@ For fetching, just **await** the Axios request to Endpoint A, and then await the
 
 **TASK 2:**
 
-Once you have the data from Endpoints A and B stored inside variables called `learners` and `mentors`, check that this data matches what you saw in Postman, and then **use your JavaScript skills** to combine the two lists into a single data structure** called `learners` that is comfortable to work with. This data structure **must** look like this:
+Once you have the data from Endpoints A and B stored inside variables called `learners` and `mentors`, check that this data matches what you saw in Postman, and then **use your JavaScript skills** to combine the two lists into a single data structure** called `learners` that is comfortable to work with. This data structure **must** look like this: here
 
 ```js
 // the variable holding the combined data must be called `learners`
