@@ -21,8 +21,8 @@ async function sprintChallenge5() {
   learners = learners.map(learner => {
     const mentorNames = learner.mentors.map(mentorId => {
       const mentor = mentors.find(m => m.id === mentorId);
-      return mentor ? mentor.fullName : null;  // Ensure that mentor name is returned, or null if not found
-    }).filter(name => name !== null); // Remove any null values to avoid empty strings
+      return mentor ? mentor.fullName : null;
+    }).filter(name => name !== null);
 
     return {
       id: learner.id,
@@ -48,7 +48,7 @@ async function sprintChallenge5() {
     heading.textContent = learner.fullName;
     email.className = 'email';
     email.textContent = learner.email;
-    mentorsHeading.className = 'mentors-heading'; // Removed 'closed' class initially
+    mentorsHeading.className = 'mentors-heading closed'; // Add closed class initially
     mentorsHeading.textContent = 'Mentors';
 
     // Populate the mentors <ul>
