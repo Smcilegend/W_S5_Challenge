@@ -48,7 +48,7 @@ async function sprintChallenge5() {
     heading.textContent = learner.fullName;
     email.className = 'email';
     email.textContent = learner.email;
-    mentorsHeading.className = 'mentors-heading closed'; // Ensure mentors list is hidden by default
+    mentorsHeading.className = 'mentors-heading'; // Removed 'closed' class initially
     mentorsHeading.textContent = 'Mentors';
 
     // Populate the mentors <ul>
