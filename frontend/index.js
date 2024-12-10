@@ -21,8 +21,8 @@ async function sprintChallenge5() {
   learners = learners.map(learner => {
     const mentorNames = learner.mentors.map(mentorId => {
       const mentor = mentors.find(m => m.id === mentorId);
-      return mentor ? mentor.fullName : null; 
-    }).filter(name => name !== null); 
+      return mentor ? mentor.fullName : null;  // Ensure that mentor name is returned, or null if not found
+    }).filter(name => name !== null); // Remove any null values to avoid empty strings
 
     return {
       id: learner.id,
@@ -48,13 +48,13 @@ async function sprintChallenge5() {
     heading.textContent = learner.fullName;
     email.className = 'email';
     email.textContent = learner.email;
-    mentorsHeading.className = 'mentors-heading'; 
+    mentorsHeading.className = 'mentors-heading closed'; // Ensure mentors list is hidden by default
     mentorsHeading.textContent = 'Mentors';
 
     // Populate the mentors <ul>
     learner.mentors.forEach(mentorName => {
       const mentorItem = document.createElement('li');
-      mentorItem.textContent = mentorName; 
+      mentorItem.textContent = mentorName;
       mentorsList.appendChild(mentorItem);
     });
 
@@ -88,6 +88,12 @@ async function sprintChallenge5() {
         }
       } else {
         card.classList.add('selected');
+        if (mentorsHeading.classList.contains('open')) {
+          mentorsHeading.classList.replace('open', 'closed');
+        } else {
+          mentorsHeading.classList.replace('closed', 'open');
+        }
+
         if (!isCardSelected) {
           heading.textContent += `, ID ${learner.id}`;
           info.textContent = `The selected learner is ${learner.fullName}`;
