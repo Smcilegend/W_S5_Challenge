@@ -25,6 +25,8 @@ async function sprintChallenge5() {
       return mentor ? mentor.fullName : 'Unknown Mentor';
     });
 
+    console.log(`Mentor names for learner ${learner.fullName}:`, mentorNames);
+
     return {
       id: learner.id,
       email: learner.email,
@@ -54,7 +56,7 @@ async function sprintChallenge5() {
 
     // Populate mentor list
     learner.mentors.forEach(mentor => {
-      console.log(`Adding mentor: ${mentor}`); // Debugging
+      console.log(`Adding mentor to ${learner.fullName}: ${mentor}`);
       const mentorItem = document.createElement('li');
       mentorItem.textContent = mentor;
       mentorsList.appendChild(mentorItem);
