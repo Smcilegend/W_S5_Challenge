@@ -20,13 +20,17 @@ async function sprintChallenge5() {
   // Task 2: Combine learners and mentors
   learners = learners.map(learner => {
     const mentorNames = learner.mentors.map(mentorId => {
+      // Try to find the mentor by ID
       const mentor = mentors.find(m => m.id === mentorId);
+
       if (!mentor) {
-        console.error(`Mentor with ID ${mentorId} not found.`);
-        return ''; // Return empty string if mentor is not found
+        // Log an error if the mentor is not found
+        console.error(`Mentor with ID ${mentorId} not found for learner: ${learner.fullName}`);
+        return ''; 
       }
-      return mentor.fullName;
-    }).filter(name => name !== ''); // Filter out empty strings if no mentor found
+
+      return mentor.fullName; 
+    }).filter(name => name !== ''); 
 
     return {
       id: learner.id,
