@@ -1,7 +1,7 @@
-async function sprintChallenge5() {
+async function sprintChallenge5() { 
   let mentors = [];
   let learners = [];
-
+  
   // Task 1: Fetch mentors and learners data
   async function fetchData() {
     try {
@@ -15,8 +15,6 @@ async function sprintChallenge5() {
       console.error('Error fetching data:', error);
     }
   }
-
-  // Fetch the data
   await fetchData();
 
   // Task 2: Combine learners and mentors
@@ -24,7 +22,7 @@ async function sprintChallenge5() {
     const mentorNames = learner.mentors.map(mentorId => {
       const mentor = mentors.find(m => m.id === mentorId);
       return mentor ? mentor.fullName : null;
-    }).filter(name => name !== null);  // Filter out null values for mentors that were not found
+    }).filter(name => name !== null);
 
     return {
       id: learner.id,
@@ -50,20 +48,14 @@ async function sprintChallenge5() {
     heading.textContent = learner.fullName;
     email.className = 'email';
     email.textContent = learner.email;
-
-    // Ensure mentors heading starts with 'closed' class, but mentors-heading is always added first
-    mentorsHeading.classList.add('mentors-heading');
-    mentorsHeading.classList.add('closed'); // Now the 'closed' class is added to mentors-heading
-
+    mentorsHeading.className = 'mentors-heading closed'; // Add closed class initially
     mentorsHeading.textContent = 'Mentors';
 
-    // Populate the mentors <ul> with mentor names
+    // Populate the mentors <ul>
     learner.mentors.forEach(mentorName => {
-      if (mentorName) {  // Only add mentor if the name exists
-        const mentorItem = document.createElement('li');
-        mentorItem.textContent = mentorName;
-        mentorsList.appendChild(mentorItem);
-      }
+      const mentorItem = document.createElement('li');
+      mentorItem.textContent = mentorName;
+      mentorsList.appendChild(mentorItem);
     });
 
     // Append elements to the card
