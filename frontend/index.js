@@ -1,5 +1,4 @@
 async function sprintChallenge5() { 
-
   let mentors = [];
   let learners = [];
   
@@ -16,19 +15,16 @@ async function sprintChallenge5() {
       console.error('Error fetching data:', error);
     }
   }
-    await fetchData();
+  await fetchData();
 
   // Task 2: Combine learners and mentors
   learners = learners.map(learner => {
-    
     const mentorNames = learner.mentors.map(mentorId => {
-      
       const mentor = mentors.find(m => m.id === mentorId);
-      
-      return mentor ? mentor.fullName : null;
-    }).filter(name => name !== null);  
-  
-    
+      if (!mentor) console.warn(`Mentor ID ${mentorId} not found for learner ${learner.fullName}`);
+      return mentor ? mentor.fullName : 'Unknown Mentor';
+    });
+
     return {
       id: learner.id,
       email: learner.email,
@@ -56,11 +52,13 @@ async function sprintChallenge5() {
     mentorsHeading.className = 'mentors-heading closed';
     mentorsHeading.textContent = 'Mentors';
 
-    for (let mentor of learner.mentors) {
+    // Populate mentor list
+    learner.mentors.forEach(mentor => {
+      console.log(`Adding mentor: ${mentor}`); // Debugging
       const mentorItem = document.createElement('li');
       mentorItem.textContent = mentor;
       mentorsList.appendChild(mentorItem);
-    }
+    });
 
     card.appendChild(heading);
     card.appendChild(email);
@@ -111,6 +109,6 @@ async function sprintChallenge5() {
   footer.textContent = `© BLOOM INSTITUTE OF TECHNOLOGY ${currentYear}`;
 }
 
-  // ❗ DO NOT CHANGE THIS CODE. WORK ONLY INSIDE TASKS 1, 2, 3
-  if (typeof module !== 'undefined' && module.exports) module.exports = { sprintChallenge5 }
-  else sprintChallenge5();
+// ❗ DO NOT CHANGE THIS CODE. WORK ONLY INSIDE TASKS 1, 2, 3
+if (typeof module !== 'undefined' && module.exports) module.exports = { sprintChallenge5 }
+else sprintChallenge5();
