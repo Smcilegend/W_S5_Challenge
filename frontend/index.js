@@ -1,13 +1,13 @@
-async function sprintChallenge5() { 
+async function sprintChallenge5() {
   let mentors = [];
   let learners = [];
-  
+
   // Task 1: Fetch mentors and learners data
   async function fetchData() {
     try {
-      const [learnersResponse, mentorsResponse] = await Promise.all([ 
-        axios.get('http://localhost:3003/api/learners'), 
-        axios.get('http://localhost:3003/api/mentors') 
+      const [learnersResponse, mentorsResponse] = await Promise.all([
+        axios.get('http://localhost:3003/api/learners'),
+        axios.get('http://localhost:3003/api/mentors')
       ]);
       learners = learnersResponse.data;
       mentors = mentorsResponse.data;
@@ -15,6 +15,8 @@ async function sprintChallenge5() {
       console.error('Error fetching data:', error);
     }
   }
+
+  // Fetch the data
   await fetchData();
 
   // Task 2: Combine learners and mentors
@@ -22,7 +24,7 @@ async function sprintChallenge5() {
     const mentorNames = learner.mentors.map(mentorId => {
       const mentor = mentors.find(m => m.id === mentorId);
       return mentor ? mentor.fullName : null;
-    }).filter(name => name !== null);
+    }).filter(name => name !== null);  // Filter out null values for mentors that were not found
 
     return {
       id: learner.id,
@@ -48,14 +50,20 @@ async function sprintChallenge5() {
     heading.textContent = learner.fullName;
     email.className = 'email';
     email.textContent = learner.email;
-    mentorsHeading.className = 'mentors-heading closed'; // Ensure closed class initially
+
+    // Ensure mentors heading starts with 'closed' class, but mentors-heading is always added first
+    mentorsHeading.classList.add('mentors-heading');
+    mentorsHeading.classList.add('closed'); // Now the 'closed' class is added to mentors-heading
+
     mentorsHeading.textContent = 'Mentors';
 
-    // Populate the mentors <ul>
+    // Populate the mentors <ul> with mentor names
     learner.mentors.forEach(mentorName => {
-      const mentorItem = document.createElement('li');
-      mentorItem.textContent = mentorName;
-      mentorsList.appendChild(mentorItem);
+      if (mentorName) {  // Only add mentor if the name exists
+        const mentorItem = document.createElement('li');
+        mentorItem.textContent = mentorName;
+        mentorsList.appendChild(mentorItem);
+      }
     });
 
     // Append elements to the card
