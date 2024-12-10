@@ -20,10 +20,9 @@ async function sprintChallenge5() {
   // Task 2: Combine learners and mentors
   learners = learners.map(learner => {
     const mentorNames = learner.mentors.map(mentorId => {
-      // Find the mentor by ID
       const mentor = mentors.find(m => m.id === mentorId);
-      return mentor ? mentor.fullName : 'Unknown Mentor';
-    });
+      return mentor ? mentor.fullName : null; // Avoid placeholder text
+    }).filter(name => name !== null); // Remove any null entries
 
     return {
       id: learner.id,
@@ -38,7 +37,7 @@ async function sprintChallenge5() {
   const info = document.querySelector('.info');
   info.textContent = 'No learner is selected';
 
-  for (let learner of learners) {
+  learners.forEach(learner => {
     const card = document.createElement('div');
     const heading = document.createElement('h3');
     const email = document.createElement('div');
@@ -52,22 +51,23 @@ async function sprintChallenge5() {
     mentorsHeading.className = 'mentors-heading';
     mentorsHeading.textContent = 'Mentors';
 
-    // Populate mentor list with correct names
+    // Populate mentor list
     learner.mentors.forEach(mentorName => {
       const mentorItem = document.createElement('li');
-      mentorItem.textContent = mentorName;
+      mentorItem.textContent = mentorName; // Ensure correct name
       mentorsList.appendChild(mentorItem);
     });
 
+    // Append elements to the card
     card.appendChild(heading);
     card.appendChild(email);
     card.appendChild(mentorsHeading);
     card.appendChild(mentorsList);
 
-    card.dataset.fullName = learner.fullName;
-
+    // Add card to container
     cardsContainer.appendChild(card);
 
+    // Add click event for card
     card.addEventListener('click', evt => {
       const mentorsHeading = card.querySelector('h4');
       const didClickTheMentors = evt.target === mentorsHeading;
@@ -75,7 +75,7 @@ async function sprintChallenge5() {
 
       document.querySelectorAll('.card').forEach(crd => {
         crd.classList.remove('selected');
-        crd.querySelector('h3').textContent = crd.dataset.fullName;
+        crd.querySelector('h3').textContent = crd.dataset.fullName || crd.querySelector('h3').textContent.split(', ID')[0];
       });
 
       info.textContent = 'No learner is selected';
@@ -94,7 +94,7 @@ async function sprintChallenge5() {
         }
       }
     });
-  }
+  });
 
   // Footer
   const footer = document.querySelector('footer');
