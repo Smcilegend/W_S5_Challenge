@@ -21,8 +21,12 @@ async function sprintChallenge5() {
   learners = learners.map(learner => {
     const mentorNames = learner.mentors.map(mentorId => {
       const mentor = mentors.find(m => m.id === mentorId);
-      return mentor ? mentor.fullName : null;
-    }).filter(name => name !== null); // Remove null values
+      if (!mentor) {
+        console.error(`Mentor with ID ${mentorId} not found.`);
+        return ''; // Return empty string if mentor is not found
+      }
+      return mentor.fullName;
+    }).filter(name => name !== ''); // Filter out empty strings if no mentor found
 
     return {
       id: learner.id,
