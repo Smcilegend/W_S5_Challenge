@@ -48,7 +48,7 @@ async function sprintChallenge5() {
     heading.textContent = learner.fullName;
     email.className = 'email';
     email.textContent = learner.email;
-    mentorsHeading.className = 'mentors-heading closed'; // Add closed class initially
+    mentorsHeading.className = 'mentors-heading closed';
     mentorsHeading.textContent = 'Mentors';
 
     // Populate the mentors <ul>
