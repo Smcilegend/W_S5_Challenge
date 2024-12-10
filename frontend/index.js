@@ -5,9 +5,9 @@ async function sprintChallenge5() {
   // Task 1: Fetch mentors and learners data
   async function fetchData() {
     try {
-      const [learnersResponse, mentorsResponse] = await Promise.all([
-        axios.get('http://localhost:3003/api/learners'),
-        axios.get('http://localhost:3003/api/mentors')
+      const [learnersResponse, mentorsResponse] = await Promise.all([ 
+        axios.get('http://localhost:3003/api/learners'), 
+        axios.get('http://localhost:3003/api/mentors') 
       ]);
       learners = learnersResponse.data;
       mentors = mentorsResponse.data;
@@ -48,7 +48,7 @@ async function sprintChallenge5() {
     heading.textContent = learner.fullName;
     email.className = 'email';
     email.textContent = learner.email;
-    mentorsHeading.className = 'mentors-heading closed'; // Add closed class initially
+    mentorsHeading.className = 'mentors-heading closed'; // Ensure closed class initially
     mentorsHeading.textContent = 'Mentors';
 
     // Populate the mentors <ul>
