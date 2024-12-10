@@ -21,8 +21,8 @@ async function sprintChallenge5() {
   learners = learners.map(learner => {
     const mentorNames = learner.mentors.map(mentorId => {
       const mentor = mentors.find(m => m.id === mentorId);
-      return mentor ? mentor.fullName : null; // Avoid placeholder text
-    }).filter(name => name !== null); // Remove any null entries
+      return mentor ? mentor.fullName : null; 
+    }).filter(name => name !== null); 
 
     return {
       id: learner.id,
@@ -48,13 +48,13 @@ async function sprintChallenge5() {
     heading.textContent = learner.fullName;
     email.className = 'email';
     email.textContent = learner.email;
-    mentorsHeading.className = 'mentors-heading';
+    mentorsHeading.className = 'mentors-heading'; 
     mentorsHeading.textContent = 'Mentors';
 
-    // Populate mentor list
+    // Populate the mentors <ul>
     learner.mentors.forEach(mentorName => {
       const mentorItem = document.createElement('li');
-      mentorItem.textContent = mentorName; // Ensure correct name
+      mentorItem.textContent = mentorName; 
       mentorsList.appendChild(mentorItem);
     });
 
