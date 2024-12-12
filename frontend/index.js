@@ -1,7 +1,7 @@
-async function sprintChallenge5() { 
+async function sprintChallenge5() {
   let mentors = [];
   let learners = [];
-  
+
   // Task 1: Fetch mentors and learners data
   async function fetchData() {
     try {
@@ -20,11 +20,9 @@ async function sprintChallenge5() {
   // Task 2: Combine learners and mentors
   learners = learners.map(learner => {
     const mentorNames = learner.mentors.map(mentorId => {
-      // Try to find the mentor by ID
-      const mentor = mentors.find(m => m.id === mentorId);
+      const mentor = mentors.find(m => m.id == mentorId); 
 
       if (!mentor) {
-        // Log an error if the mentor is not found
         console.error(`Mentor with ID ${mentorId} not found for learner: ${learner.fullName}`);
         return ''; 
       }
@@ -59,38 +57,36 @@ async function sprintChallenge5() {
     mentorsHeading.className = 'closed';
     mentorsHeading.textContent = 'Mentors';
 
-    // Populate the mentors <ul>
     learner.mentors.forEach(mentorName => {
       const mentorItem = document.createElement('li');
       mentorItem.textContent = mentorName;
       mentorsList.appendChild(mentorItem);
     });
 
-    // Append elements to the card
+    
     card.appendChild(heading);
     card.appendChild(email);
     card.appendChild(mentorsHeading);
     card.appendChild(mentorsList);
 
-    // Add card to container
+    
     cardsContainer.appendChild(card);
 
-    // Add click event for card
+    
     card.addEventListener('click', evt => {
       const mentorsHeading = card.querySelector('h4');
       const didClickTheMentors = evt.target === mentorsHeading;
       const isCardSelected = card.classList.contains('selected');
 
-      // Reset previously selected cards
+      
       document.querySelectorAll('.card').forEach(crd => {
         crd.classList.remove('selected');
         crd.querySelector('h3').textContent = crd.dataset.fullName || crd.querySelector('h3').textContent.split(', ID')[0];
       });
 
-      // Clear the info text when no card is selected
       info.textContent = 'No learner is selected';
 
-      // If the mentors heading was not clicked
+     
       if (!didClickTheMentors) {
         if (!isCardSelected) {
           card.classList.add('selected');
@@ -98,7 +94,7 @@ async function sprintChallenge5() {
           info.textContent = `The selected learner is ${learner.fullName}`;
         }
       } else {
-        // Toggling the mentors list visibility
+        
         card.classList.add('selected');
         if (mentorsHeading.classList.contains('open')) {
           mentorsHeading.classList.replace('open', 'closed');
@@ -106,7 +102,7 @@ async function sprintChallenge5() {
           mentorsHeading.classList.replace('closed', 'open');
         }
 
-        // Update the info text with learner information
+        
         if (!isCardSelected) {
           heading.textContent += `, ID ${learner.id}`;
           info.textContent = `The selected learner is ${learner.fullName}`;
