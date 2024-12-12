@@ -20,23 +20,27 @@ async function sprintChallenge5() {
   // Task 2: Combine learners and mentors
   learners = learners.map(learner => {
     const mentorNames = learner.mentors.map(mentorId => {
-      const mentor = mentors.find(m => m.id == mentorId); 
-
+      
+      const mentor = mentors.find(m => m.id == mentorId);
+  
       if (!mentor) {
+        
         console.error(`Mentor with ID ${mentorId} not found for learner: ${learner.fullName}`);
         return ''; 
       }
-
+  
       return mentor.fullName; 
     }).filter(name => name !== ''); 
-
+  
+    
     return {
       id: learner.id,
       email: learner.email,
       fullName: learner.fullName,
-      mentors: mentorNames
+      mentors: mentorNames,
     };
   });
+  
 
   // Task 3: Populate the UI with learner cards
   const cardsContainer = document.querySelector('.cards');
