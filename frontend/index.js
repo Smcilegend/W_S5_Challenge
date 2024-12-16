@@ -21,17 +21,20 @@ async function sprintChallenge5() {
   learners = learners.map(learner => {
     const mentorNames = Array.isArray(learner.mentors) 
       ? learner.mentors.map(mentorId => {
+          
           const mentor = mentors.find(m => m.id === mentorId);
   
+          
           if (!mentor) {
             console.warn(`Mentor with ID ${mentorId} not found for learner: ${learner.fullName}`);
             return 'Unknown Mentor';
           }
   
-          return mentor.fullName;
+          return mentor.fullName; 
         })
-      : [];
+      : [];  
   
+    
     return {
       id: learner.id,
       email: learner.email,
