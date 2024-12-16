@@ -19,22 +19,23 @@ async function sprintChallenge5() {
 
   // Task 2: Combine learners and mentors
   learners = learners.map(learner => {
+    // Ensure the mentors field is an array, otherwise default to an empty array
     const mentorNames = Array.isArray(learner.mentors) 
       ? learner.mentors.map(mentorId => {
-          
+          // Find the mentor by ID
           const mentor = mentors.find(m => m.id === mentorId);
   
-          
+          // Handle missing mentor
           if (!mentor) {
             console.warn(`Mentor with ID ${mentorId} not found for learner: ${learner.fullName}`);
             return 'Unknown Mentor';
           }
   
-          return mentor.fullName; 
+          return mentor.fullName; // Replace ID with mentor's full name
         })
-      : [];  
+      : [];  // Default to an empty array if mentors field is not an array
   
-    
+    // Return the combined learner data with mentor names
     return {
       id: learner.id,
       email: learner.email,
@@ -60,7 +61,7 @@ async function sprintChallenge5() {
     const heading = document.createElement('h3');
     const email = document.createElement('div');
     const mentorsHeading = document.createElement('h4');
-    const mentorsList = document.createElement('ul');
+    const mentorsList = document.createElement('div'); // Changed to a div for direct display
 
     card.className = 'card';
     heading.textContent = learner.fullName;
@@ -69,11 +70,9 @@ async function sprintChallenge5() {
     mentorsHeading.className = 'closed';
     mentorsHeading.textContent = 'Mentors';
 
-    learner.mentors.forEach(mentorName => {
-      const mentorItem = document.createElement('li');
-      mentorItem.textContent = mentorName;
-      mentorsList.appendChild(mentorItem);
-    });
+    // Display mentors as text directly in the mentorsList div
+    mentorsList.className = 'mentors'; // Styling class for the mentors section
+    mentorsList.textContent = learner.mentors.join(', '); // Join mentors by a comma and space
 
     card.appendChild(heading);
     card.appendChild(email);
